@@ -94,27 +94,6 @@ function loadModel(index) {
 }
 
 
-/*
-// Funzione per caricare un modello
-function loadModel(index) {
-  if (currentModel) {
-    scene.remove(currentModel);
-  }
-
-  const { model } = models[index];
-
-  loader.load(`/models/${model}`, (fbx) => {
-    currentModel = fbx;
-    currentModel.position.set(0, 1, 0);
-    currentModel.scale.set(0.002, 0.002, 0.002);
-    scene.add(currentModel);
-    updateTaskLabelFromIndex(); // Aggiorna il testo del task
-  }, undefined, (error) => {
-    console.error('Errore nel caricamento del modello:', error);
-  });
-}
-  */
-
 //navigazione tra modelli
 document.getElementById('prev').onclick = () => {
   if (models.length === 0) return; // Blocca se non ci sono modelli
@@ -157,24 +136,6 @@ function updateButtonPosition() {
   }
 }
 
-/*
-function updateButtonPosition() {
-  if (currentModel) {
-    const vector = new THREE.Vector3();
-    vector.copy(currentModel.position);
-    vector.project(camera);
-
-    const x = (vector.x * 0.5 + 0.5) * window.innerWidth;
-    const y = (-vector.y * 0.5 + 0.5) * window.innerHeight;
-
-    const btn = document.getElementById("done-btn");
-    btn.style.left = `${x - 40}px`;
-    btn.style.top = `${y + 250}px`;
-  }
-}
-*/
-
-
 // Funzione per aggiornare la posizione dell'etichetta del task
 
 function updateTaskLabelPosition() {
@@ -198,23 +159,6 @@ function updateTaskLabelPosition() {
   }
 }
 
-/*
-function updateTaskLabelPosition() {
-  if (currentModel) {
-    const vector = new THREE.Vector3();
-    vector.copy(currentModel.position);
-    vector.project(camera);
-
-    const x = (vector.x * 0.5 + 0.5) * window.innerWidth;
-    const y = (-vector.y * 0.5 + 0.5) * window.innerHeight;
-
-    const label = document.getElementById("task-label");
-    label.style.left = `${x - label.offsetWidth / 2}px`;
-    label.style.top = `${y - label.offsetHeight - 160}px`;
-  }
-}
-  */
-
 // Funzione che aggiorna il task corrente
 function updateTaskLabel(text) {
   const taskLabel = document.getElementById('task-label');
@@ -228,8 +172,6 @@ function updateTaskLabelFromIndex() {
     updateTaskLabel(`Da Fare: ${models[currentModelIndex].task}`);
   }
 }
-
-
 
 
 // Array per salvare lo storico
@@ -292,70 +234,11 @@ document.getElementById('history-btn').onclick = () => {
   document.getElementById('history-modal').style.display = 'flex';
 };
 
-/*
-// Apertura del modal storico
-document.getElementById('history-btn').onclick = () => {
-  const historyList = document.getElementById('history-list');
-  historyList.innerHTML = ''; // Reset
-
-  if (completedTasksHistory.length === 0) {
-    historyList.innerHTML = '<li>Nessuna attività completata.</li>';
-  } else {
-    completedTasksHistory.forEach((task, index) => {
-      const li = document.createElement('li');
-      li.textContent = `${index + 1}. ${task.task}`; //(${task.model})
-      historyList.appendChild(li);
-    });
-  }
-
-  document.getElementById('history-modal').style.display = 'flex';
-};
-*/
 
 // Chiusura del modal storico
 document.getElementById('close-history-btn').onclick = () => {
   document.getElementById('history-modal').style.display = 'none';
 };
-
-
-
-/*
-// Funzione di gestione del pulsante "Fatto"
-document.getElementById('done-btn').onclick = () => {
-  if (models.length === 0) return;
-
-  // 🎉 Effetto coriandoli
-  confetti({
-    particleCount: 150,
-    spread: 70,
-    origin: { y: 0.6 }
-  });
-
-  // Rimuovi il modello dalla scena
-  if (currentModel) {
-    scene.remove(currentModel);
-    currentModel = null;
-  }
-
-  // Rimuovi il modello dalla lista dei task
-  models.splice(currentModelIndex, 1);
-
-  // Se non ci sono modelli disponibili, aggiorna l'interfaccia
-  if (models.length === 0) {
-    updateCounter();
-    updateTaskLabelFromIndex();
-    return;
-  }
-
-  // Se l'indice attuale è fuori dal range, azzeralo
-  if (currentModelIndex >= models.length) {
-    currentModelIndex = 0;
-  }
-
-  loadModel(currentModelIndex);
-  updateCounter();
-};
-*/
 
 
 
@@ -373,28 +256,6 @@ document.getElementById('new-task-btn').onclick = () => {
   });
 };
 
-/*
-// Funzione per aggiungere un nuovo task (con il modello selezionato)
-document.getElementById('new-task-btn').onclick = () => {
-  // Mostra il modal per aggiungere un nuovo task
-  document.getElementById('task-modal').style.display = 'flex';
-
-  // Popola la lista dei modelli nel select
-  const modelSelect = document.getElementById('model-select');
-  modelSelect.innerHTML = ''; // Reset lista modelli
-  
-  // Popola il select solo con i modelli fissi (che sono disponibili)
-  fixedModels.forEach((modelObj, index) => {
-    // Se il modello non ha ancora un task associato
-    if (!models.some(task => task.model === modelObj.model)) {
-      const option = document.createElement('option');
-      option.value = index; // Usa l'indice per identificare il modello
-      option.textContent = modelObj.model; // Mostra il nome del modello
-      modelSelect.appendChild(option);
-    }
-  });
-};
-*/
 
 // Annulla l'operazione (chiudi la finestra)
 document.getElementById('cancel-btn').onclick = () => {
@@ -425,37 +286,6 @@ document.getElementById('confirm-btn').onclick = () => {
 };
 
 
-/*
-// Conferma l'aggiunta del nuovo task
-document.getElementById('confirm-btn').onclick = () => {
-  const taskName = document.getElementById('new-task-name').value;
-  const modelIndex = document.getElementById('model-select').value;
-
-  if (taskName && modelIndex !== null) {
-    // Crea un nuovo task e modello
-    const newTask = {
-      model: fixedModels[modelIndex].model,  // Aggiungi il modello selezionato
-      task: taskName  // Il task inserito
-    };
-
-    // Aggiungi il nuovo task alla lista
-    models.push(newTask);
-
-    // Chiudi il modal
-    document.getElementById('task-modal').style.display = 'none';
-
-    // Ricarica il modello e aggiorna la vista
-    currentModelIndex = models.length - 1;
-    loadModel(currentModelIndex);
-    updateCounter();
-    updateTaskLabelFromIndex();
-  } else {
-    alert("Compila tutti i campi.");
-  }
-};
-*/
-
-
 // Pulsante per aprire la finestra delle informazioni
 document.getElementById('info-btn').onclick = () => {
   document.getElementById('info-modal').style.display = 'block';  // Mostra il modale
@@ -465,8 +295,6 @@ document.getElementById('info-btn').onclick = () => {
 document.getElementById('close-info').onclick = () => {
   document.getElementById('info-modal').style.display = 'none';  // Nasconde il modale
 };
-
-
 
 // POST PROCESSING
 const composer = new EffectComposer(renderer);
