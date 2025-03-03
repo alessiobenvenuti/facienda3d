@@ -103,7 +103,7 @@ function loadModel(index) {
 
   const { model } = models[index];
 
-  loader.load(`models/${model}`, (fbx) => {
+  loader.load(`/models/${model}`, (fbx) => {
     currentModel = fbx;
     currentModel.position.set(0, 1, 0);
     currentModel.scale.set(0.002, 0.002, 0.002);
