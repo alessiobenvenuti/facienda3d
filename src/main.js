@@ -32,22 +32,22 @@ scene.add(directionalLight);
 const loader = new FBXLoader();
 
 const allModels = [
-  
-  'Tappeto.fbx',// da mettere verticale
+
   'Termosifone.fbx',
   'Scopa.fbx',
   'Pianta.fbx',
   'Lavatrice.fbx',
   'Frigo.fbx',
-  'Letto.fbx' //da scalare e abbassare
 ];
 
 // Lista fissa dei modelli
 const fixedModels = [
-  //{ model: 'Oven.fbx', task: 'pulire fornelli' },
-  //{ model: 'Plant A.fbx', task: 'annaffiare pianta' },
-  //{ model: 'Lavatrice.fbx', task: 'fare lavatrice' },
-  // Aggiungi altri modelli qui
+  
+  { model: 'Lavatrice.fbx', task: 'fare lavatrice' },
+  { model: 'Termosifone.fbx', task: 'accendere riscaldamento' },
+  { model: 'Pianta.fbx', task: 'annaffiare pianta' },
+  
+  
 ];
 
 let models = [...fixedModels]; // Lista dei task attivi, inizializzata con i modelli fissi
@@ -82,7 +82,7 @@ function loadModel(index) {
 
   const { model } = models[index];
 
-  loader.load(`../public/models/${model}`, (fbx) => {
+  loader.load(`/facienda3d/models/${model}`, (fbx) => {
     currentModel = fbx;
     currentModel.position.set(0, 1, 0);
     currentModel.scale.set(0.002, 0.002, 0.002);
