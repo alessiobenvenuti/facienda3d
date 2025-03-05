@@ -33,15 +33,14 @@ const loader = new FBXLoader();
 
 const allModels = [
 
-  'Termosifone.fbx',
-  'Lavatrice.fbx',
+  'Termosifone.fbx', 
+  'Lavatrice.fbx', 
   'Lavastoviglie.fbx',
-  'Frigo.fbx',
+  'Frigo.fbx', 
   'Pianta.fbx',
-  'Microonde.fbx',
-  'Tavolo.fbx',
-  'Finestra.fbx',
-  'Ventilatore.fbx',
+  'Tavolo.fbx', 
+  'Finestra.fbx', 
+  'Ventilatore.fbx', 
   'TaskGenerico.fbx',
 
 
@@ -52,8 +51,7 @@ const fixedModels = [
   
   { model: 'Lavatrice.fbx', task: 'fare lavatrice' },
   { model: 'Termosifone.fbx', task: 'accendere riscaldamento' },
-  { model: 'Pianta.fbx', task: 'annaffiare pianta' },
-  
+  { model: 'Pianta.fbx', task: 'annaffiare pianta' }, 
   
 ];
 
