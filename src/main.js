@@ -34,13 +34,13 @@ const loader = new FBXLoader();
 const allModels = [
 
   'Termosifone.fbx',
-  'Scopa.fbx',
+  'TaskGenerico.fbx',
   'Pianta.fbx',
   'Lavatrice.fbx',
   'Frigo.fbx',
 ];
 
-// Lista fissa dei modelli
+
 const fixedModels = [
   
   { model: 'Lavatrice.fbx', task: 'fare lavatrice' },
@@ -50,11 +50,11 @@ const fixedModels = [
   
 ];
 
-let models = [...fixedModels]; // Lista dei task attivi, inizializzata con i modelli fissi
+let models = [...fixedModels]; 
 let currentModelIndex = 0;
 let currentModel;
 
-// Funzione per aggiornare il contatore dei task
+
 function updateCounter() {
   const counterElement = document.getElementById('model-counter');
   if (models.length === 0) {
@@ -73,7 +73,7 @@ function loadModel(index) {
     console.warn('Nessun modello disponibile da caricare.');
     updateTaskLabel("Lista vuota, inizia ad aggiungere task tramite il pulsante +Nuovo Task.");
     updateCounter();
-    return; // Interrompi il caricamento del modello
+    return; // Interrompe il caricamento del modello
   }
 
   if (currentModel) {
@@ -96,26 +96,26 @@ function loadModel(index) {
 
 //navigazione tra modelli
 document.getElementById('prev').onclick = () => {
-  if (models.length === 0) return; // Blocca se non ci sono modelli
+  if (models.length === 0) return; 
   currentModelIndex = (currentModelIndex - 1 + models.length) % models.length;
   loadModel(currentModelIndex);
 };
 
 document.getElementById('next').onclick = () => {
-  if (models.length === 0) return; // Blocca se non ci sono modelli
+  if (models.length === 0) return; // return se non ci sono modelli
   currentModelIndex = (currentModelIndex + 1) % models.length;
   loadModel(currentModelIndex);
 };
 
 
-// Resize responsivo
+
 window.addEventListener('resize', () => {
   camera.aspect = window.innerWidth / window.innerHeight;
   camera.updateProjectionMatrix();
   renderer.setSize(window.innerWidth, window.innerHeight);
 });
 
-// Funzione per aggiornare la posizione del bottone "Fatto" in base alla posizione del modello
+
 
 function updateButtonPosition() {
   const btn = document.getElementById("done-btn");
@@ -130,13 +130,12 @@ function updateButtonPosition() {
 
     btn.style.left = `${x - 40}px`;
     btn.style.top = `${y + 250}px`;
-    btn.style.display = 'block'; // Mostra il bottone se c'è un modello
+    btn.style.display = 'block'; 
   } else {
     btn.style.display = 'none'; // Nascondi il bottone se non ci sono modelli
   }
 }
 
-// Funzione per aggiornare la posizione dell'etichetta del task
 
 function updateTaskLabelPosition() {
   const label = document.getElementById("task-label");
@@ -146,20 +145,24 @@ function updateTaskLabelPosition() {
     vector.copy(currentModel.position);
     vector.project(camera);
 
-    const x = (vector.x * 0.5 + 0.5) * window.innerWidth;
-    const y = (-vector.y * 0.5 + 0.5) * window.innerHeight;
+    //const x = (vector.x * 0.5 + 0.5) * window.innerWidth;
+    //const y = (-vector.y * 0.5 + 0.5) * window.innerHeight;
 
-    label.style.left = `${x - label.offsetWidth / 2 +40 }px`;
-    label.style.top = `${y - label.offsetHeight - 160}px`;
+    label.style.left = `50%`;
+    label.style.top = `100px`;
+    label.style.transform = 'translateX(-50%)';
+
+    //label.style.left = `${x - label.offsetWidth / 2 +40 }px`;
+    //label.style.top = `${y - label.offsetHeight - 160}px`;
   } else {
-    // Quando non c'è modello, centra il testo o lo sposti in una posizione fissa
+    
     label.style.left = `50%`;
     label.style.top = `100px`;
     label.style.transform = 'translateX(-50%)';
   }
 }
 
-// Funzione che aggiorna il task corrente
+
 function updateTaskLabel(text) {
   const taskLabel = document.getElementById('task-label');
   taskLabel.textContent = text;
@@ -174,15 +177,15 @@ function updateTaskLabelFromIndex() {
 }
 
 
-// Array per salvare lo storico
+
 const completedTasksHistory = [];
 
-// Modifica del pulsante "Fatto" per salvare i task completati
+
 document.getElementById('done-btn').onclick = () => {
   if (models.length === 0) return;
 
   const completedTask = models[currentModelIndex];
-  completedTasksHistory.push(completedTask); // Salvo nello storico
+  completedTasksHistory.push(completedTask); // Salvataggio nello storico
 
   confetti({
     particleCount: 150,
@@ -215,7 +218,7 @@ document.getElementById('done-btn').onclick = () => {
 
 document.getElementById('history-btn').onclick = () => {
   const historyList = document.getElementById('history-list');
-  historyList.innerHTML = ''; // Reset
+  historyList.innerHTML = ''; 
 
   if (completedTasksHistory.length === 0) {
     if (models.length === 0) {
@@ -235,7 +238,7 @@ document.getElementById('history-btn').onclick = () => {
 };
 
 
-// Chiusura del modal storico
+
 document.getElementById('close-history-btn').onclick = () => {
   document.getElementById('history-modal').style.display = 'none';
 };
@@ -246,18 +249,18 @@ document.getElementById('new-task-btn').onclick = () => {
   document.getElementById('task-modal').style.display = 'flex';
 
   const modelSelect = document.getElementById('model-select');
-  modelSelect.innerHTML = ''; // Reset lista modelli
+  modelSelect.innerHTML = ''; 
 
   allModels.forEach((modelName) => {
     const option = document.createElement('option');
-    option.value = modelName; // Ora il valore è il nome del modello
+    option.value = modelName; 
     option.textContent = modelName;
     modelSelect.appendChild(option);
   });
 };
 
 
-// Annulla l'operazione (chiudi la finestra)
+
 document.getElementById('cancel-btn').onclick = () => {
   document.getElementById('task-modal').style.display = 'none';
 };
@@ -286,33 +289,32 @@ document.getElementById('confirm-btn').onclick = () => {
 };
 
 
-// Pulsante per aprire la finestra delle informazioni
+
 document.getElementById('info-btn').onclick = () => {
-  document.getElementById('info-modal').style.display = 'block';  // Mostra il modale
+  document.getElementById('info-modal').style.display = 'block';  
 };
 
-// Pulsante per chiudere la finestra delle informazioni
+
 document.getElementById('close-info').onclick = () => {
-  document.getElementById('info-modal').style.display = 'none';  // Nasconde il modale
+  document.getElementById('info-modal').style.display = 'none';  
 };
 
 // POST PROCESSING
 const composer = new EffectComposer(renderer);
 composer.addPass(new RenderPass(scene, camera));
 
-// Bloom pass
 const bloomPass = new UnrealBloomPass(
   new THREE.Vector2(window.innerWidth, window.innerHeight),
-  0.5,  // Intensità bloom
-  0.4,  // Raggio
-  0.85  // Soglia
+  0.5,  
+  0.4,  
+  0.85  
 );
 composer.addPass(bloomPass);
 
-// Animazione
+
 function animate() {
   requestAnimationFrame(animate);
-  if (currentModel) currentModel.rotation.y += 0.005; // Rotazione leggera per effetto dinamico
+  if (currentModel) currentModel.rotation.y += 0.005; 
   renderer.render(scene, camera);
 
   updateCounter();
