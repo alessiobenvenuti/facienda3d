@@ -3,7 +3,6 @@
 > **Facienda 3D** è una demo interattiva di una To-Do List 3D per le faccende domestiche realizzata con la libreria Javascript **Three.js**.  
 > Al momento si tratta di un **prototipo** che mostra il funzionamento del **frontend** dell'applicazione.
 
----
 
 ## 🚀 Descrizione
 
@@ -12,7 +11,6 @@ L’obiettivo finale sarà quello di creare un'app completa per organizzare le p
 
 ⚠️ **Nota:** attualmente **non** è presente un backend o salvataggio dati persistente.  
 
----
 
 ## 🎮 Funzionalità demo
 
@@ -20,21 +18,17 @@ L’obiettivo finale sarà quello di creare un'app completa per organizzare le p
 - Visualizzazione 3D dei modelli collegati ai task    
 - Storico e progressivo dei task  
 
----
 
 ## 🌟 Anteprima
 
+![chrome_8rPMDMrYr8](https://github.com/user-attachments/assets/5b3d3367-64bc-4ad7-ae31-e5dc65ce3125)
 
-
----
 
 ## 🏗️ Tecnologie utilizzate
 
 - **HTML5** / **CSS3**
 - **JavaScript**
 - **Three.js**
-
----
 
 ## 📄 Licenza
 Software Distribuito con licenza MIT.
