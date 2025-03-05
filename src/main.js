@@ -34,10 +34,17 @@ const loader = new FBXLoader();
 const allModels = [
 
   'Termosifone.fbx',
-  'TaskGenerico.fbx',
-  'Pianta.fbx',
   'Lavatrice.fbx',
+  'Lavastoviglie.fbx',
   'Frigo.fbx',
+  'Pianta.fbx',
+  'Microonde.fbx',
+  'Tavolo.fbx',
+  'Finestra.fbx',
+  'Ventilatore.fbx',
+  'TaskGenerico.fbx',
+
+
 ];
 
 
@@ -125,14 +132,23 @@ function updateButtonPosition() {
     vector.copy(currentModel.position);
     vector.project(camera);
 
-    const x = (vector.x * 0.5 + 0.5) * window.innerWidth;
-    const y = (-vector.y * 0.5 + 0.5) * window.innerHeight;
+    //const x = (vector.x * 0.5 + 0.5) * window.innerWidth;
+    //const y = (-vector.y * 0.5 + 0.5) * window.innerHeight;
 
-    btn.style.left = `${x - 40}px`;
-    btn.style.top = `${y + 250}px`;
+    //btn.style.left = `${x - 40}px`;
+    //btn.style.top = `${y + 250}px`;
+    
+    btn.style.left = `50%`;
+    btn.style.top = `600px`;
+    btn.style.transform = 'translateX(-50%)';
+
     btn.style.display = 'block'; 
   } else {
+    btn.style.left = `50%`;
+    btn.style.top = `600px`;
+    btn.style.transform = 'translateX(-50%)';
     btn.style.display = 'none'; // Nascondi il bottone se non ci sono modelli
+    
   }
 }
 
